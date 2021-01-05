@@ -1,32 +1,23 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int N; // 1 ~ 1,000,000,000,000,000,000
-int ans = 0;
-int fib[2] = {0, 1};
-int cnt[2];
-
-int getFib(int n){
-    if(n == 0 || n == 1){
-        cnt[n] += 1;
-        return n;
-    }
-    
-    return getFib(n-2) + getFib(n-1);
-}
+long long N; // 1 ~ 1,000,000,000,000,000,000
+const int mod = 1000000;
+const int period = mod / 10 * 15;
+int fib[period];
 
 void init(){
-    //cin >> N;
+    cin >> N;
+    fib[0] = 0;
+    fib[1] = 1;
+    for(int i = 2 ; i < period ; i++){
+        fib[i] = fib[i-2] + fib[i-1];
+        fib[i] %= mod;
+    }
 }
 
 void solve(){
-    int cnt = 0;
-    for(int i = 0 ; i < 1000000000000000000 ; i++){
-        cnt += 1;
-        cnt % 1000000;
-    }
-    cout << cnt << "\n";
-    //cout << ans % 1000000 << "\n";
+    cout << fib[N % period];
 }
 
 int main(){

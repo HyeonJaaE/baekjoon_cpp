@@ -3,6 +3,7 @@ using namespace std;
 
 const int MAXN = 1000000;
 
+vector<int> lis;
 int arr[MAXN];
 int N;
 
@@ -13,7 +14,15 @@ void init(){
 }
 
 void solve(){
-    
+    for(int i = 0 ; i < N ; i++){
+        if(lis.empty() || lis.back() < arr[i] ){
+            lis.push_back(arr[i]);
+        } else {
+            auto iter = lower_bound(lis.begin(), lis.end(), arr[i]);
+            *iter = arr[i];
+        }
+    }
+    cout << lis.size() << "\n";
 }
 
 int main(){
